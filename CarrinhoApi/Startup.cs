@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using CarrinhoApi.Data;
+using CarrinhoApi.Data.Interfaces;
 
 namespace CarrinhoApi
 {
@@ -25,7 +27,11 @@ namespace CarrinhoApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.Configure<CartDatabaseSettings>(
+                Configuration.GetSection(nameof(CartDatabaseSettings)));
+
+            services.AddSingleton<ICartDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<CartDatabaseSettings>>().Value);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,0 +1,31 @@
+[
+{
+ "_id": "5d8a8bb3751cbf9ce00b5b6d",
+ "Date": "2019-09-24T21:33:38.929Z",
+ "TotalPrice": "93.00000",
+ "Sessions": {
+ "Event": {
+ "Id": 20988,
+ "Name": "It - Capitulo 2"
+ },
+ "Date": "2019-09-25T20:00:00.000Z",
+ "Theatre": {
+ "Id": 2,
+ "Name": "Kinoplex RioSul"
+ },
+ "Tickets": [
+ {
+ "Id": 23,
+ "Name": "Meia",
+ "Price": "31.00000"
+ },
+ {
+ "Id": 45,
+ "Name": "Inteira",
+ "Price": "62.00000"
+ }
+ ]
+ },
+ "Promocode": "MxNxhm3q"
+}
+]

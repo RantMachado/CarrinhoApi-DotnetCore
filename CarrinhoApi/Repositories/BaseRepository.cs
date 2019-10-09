@@ -24,7 +24,7 @@ namespace CarrinhoApi.Repositories
         public virtual void Add(TEntity obj)
         {
             ConfigDbSet();
-            _context.AddComand(() => DbSet.InsertOneAsync(obj));
+            _context.AddCommand(() => DbSet.InsertOneAsync(obj));
 
         }
 
@@ -50,13 +50,13 @@ namespace CarrinhoApi.Repositories
         public virtual void Update(TEntity obj)
         {
             ConfigDbSet();
-            _context.AddComand(() => DbSet.ReplaceOneAsync(Builders<TEntity>.Filter.Eq("_id", obj.GetId()), obj));
+            _context.AddCommand(() => DbSet.ReplaceOneAsync(Builders<TEntity>.Filter.Eq("_id", obj.GetId()), obj));
         }
 
         public virtual void Remove(Guid id)
         {
             ConfigDbSet();
-            _context.AddComand(() => DbSet.DeleteOneAsync(Builders<TEntity>.Filter.Eq("_id", id)));
+            _context.AddCommand(() => DbSet.DeleteOneAsync(Builders<TEntity>.Filter.Eq("_id", id)));
         }
 
         public void Dispose()

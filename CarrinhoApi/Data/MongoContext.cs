@@ -1,0 +1,78 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using CarrinhoApi.Data.Interfaces;
+
+namespace CarrinhoApi.Data
+{
+    public class MongoContext : IMongoContext
+    {
+        private IMongoDatabase MongoDatabase { get; set; }
+        public IClientSessionHandle ClientSession { get; set; }
+        private CartDatabaseSettings databaseSettings { get; }
+        public MongoClient MongoClient { get; set; }
+
+        private readonly List<Func<Task>> _commands;
+        private readonly IConfiguration _configuration;
+
+        //Oohhh Yeah here we go again, another construct... 
+        public MongoContext(IConfiguration configuration)
+        {
+            _configuration = configuration;
+
+            _commands = new List<Func<Task>>();
+        }
+
+        //More Methods;
+        public async Task<int> SaveChanges()
+        {
+            ConfigureMongo();
+
+            using (ClientSession = await MongoClient.StartSessionAsync())
+            {
+                ClientSession.StartTransaction();
+
+                var commandTasks = _commands.Select(c => c());
+
+                await Task.WhenAll(commandTasks);
+
+                await ClientSession.CommitTransactionAsync();
+            }
+
+            return _commands.Count;
+        }
+
+        private void ConfigureMongo()
+        {
+            if (MongoClient != null)
+                return;
+
+            MongoClient = new MongoClient(_configuration[databaseSettings.ConnectionString]);
+
+            MongoDatabase = MongoClient.GetDatabase(_configuration[databaseSettings.DatabaseName]);
+        }
+
+        public IMongoCollection<T> GetCollection<T>(string name)
+        {
+            ConfigureMongo();
+            return MongoDatabase.GetCollection<T>(name);
+        }
+
+        public void Dispose()
+        {
+            ClientSession?.Dispose();
+            GC.SuppressFinalize(this);
+        }
+
+        public void AddCommand(Func<Task> func)
+        {
+            _commands.Add(func);
+        }
+
+
+    }
+}

@@ -1,6 +1,5 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-
 using CarrinhoApi.Domain.Entities.Enums;
 
 namespace CarrinhoApi.Domain.Entities

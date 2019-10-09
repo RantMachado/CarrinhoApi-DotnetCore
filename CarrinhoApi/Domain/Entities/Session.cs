@@ -5,7 +5,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace CarrinhoApi.Domain.Entities
 {
-    public class Session
+    public class Session 
     {
         [BsonElement("Event")]
         public Event Event { get; set; }

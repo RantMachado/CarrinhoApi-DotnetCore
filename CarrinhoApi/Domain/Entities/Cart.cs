@@ -5,7 +5,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace CarrinhoApi.Domain.Entities
 {
-    public class Cart
+    public class Cart 
     {
         //Atributes
         [BsonId]

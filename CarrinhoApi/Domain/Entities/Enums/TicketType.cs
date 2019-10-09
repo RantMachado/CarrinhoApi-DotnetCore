@@ -1,6 +1,6 @@
 ﻿namespace CarrinhoApi.Domain.Entities.Enums
 {
-    enum TicketType
+    public enum TicketType
     {
         Inteira,
         Meia

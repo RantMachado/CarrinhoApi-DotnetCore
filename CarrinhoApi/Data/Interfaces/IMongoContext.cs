@@ -9,5 +9,6 @@ namespace CarrinhoApi.Data.Interfaces
         void AddCommand(Func<Task> func);
         Task<int> SaveChanges();
         IMongoCollection<T> GetCollection<T>(string name);
+        void Dispose();
     }
 }

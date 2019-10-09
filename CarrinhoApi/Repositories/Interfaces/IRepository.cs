@@ -10,7 +10,6 @@ namespace CarrinhoApi.Repositories
         Task<TEntity> GetById(Guid id);
         Task<IEnumerable<TEntity>> GetAllAsync();
         void Update(TEntity obj);
-        void Remove(Guid id);
-        void Disposable();
+        void Remove(Guid id);        
     }
 }

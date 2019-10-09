@@ -61,12 +61,7 @@ namespace CarrinhoApi.Repositories
 
         public void Dispose()
         {
-            throw new NotImplementedException();
-        }
-
-        public void Disposable()
-        {
-            throw new NotImplementedException();
+            _context?.Dispose();
         }
     }
 }

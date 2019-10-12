@@ -12,6 +12,10 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using CarrinhoApi.Data;
 using CarrinhoApi.Data.Interfaces;
+using CarrinhoApi.Repositories;
+using CarrinhoApi.Repositories.Interfaces;
+using CarrinhoApi.UoW;
+using CarrinhoApi.UoW.Interfaces;
 
 namespace CarrinhoApi
 {
@@ -32,6 +36,11 @@ namespace CarrinhoApi
 
             services.AddSingleton<ICartDatabaseSettings>(sp =>
                 sp.GetRequiredService<IOptions<CartDatabaseSettings>>().Value);
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddScoped<IMongoContext, MongoContext>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<ICartRepository, CartRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

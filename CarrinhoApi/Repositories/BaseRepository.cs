@@ -40,7 +40,7 @@ namespace CarrinhoApi.Repositories
             return data.SingleOrDefault();
         }
 
-        public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
+        public virtual async Task<List<TEntity>> GetAll()
         {
             ConfigDbSet();
             var all = await DbSet.FindAsync(Builders<TEntity>.Filter.Empty);

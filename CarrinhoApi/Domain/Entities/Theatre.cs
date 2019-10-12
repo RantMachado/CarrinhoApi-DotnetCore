@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using CarrinhoApi.ViewModel;
 
 namespace CarrinhoApi.Domain.Entities
 {
@@ -10,5 +11,11 @@ namespace CarrinhoApi.Domain.Entities
 
         [BsonElement("Name")]
         public string NameTheatre { get; set; }
+
+        public Theatre(TheatreViewModel theatre)
+        {
+            IdTheatre = theatre.IdTheatre;
+            NameTheatre = theatre.NameTheatre;
+        }
     }
 }

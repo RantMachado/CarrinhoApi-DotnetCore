@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using CarrinhoApi.Domain.Entities.Enums;
+using CarrinhoApi.ViewModel;
 
 namespace CarrinhoApi.Domain.Entities
 {
@@ -14,5 +15,12 @@ namespace CarrinhoApi.Domain.Entities
 
         [BsonElement("Price")]
         public double Price { get; set; }
+
+        public Ticket(TicketViewModel ticket)
+        {
+            IdTicket = ticket.IdTicket;
+            TicketType = ticket.TicketType;
+            Price = ticket.Price;
+        }
     }
 }

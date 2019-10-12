@@ -13,7 +13,7 @@ namespace CarrinhoApi.Data
     {
         private IMongoDatabase MongoDatabase { get; set; }
         public IClientSessionHandle ClientSession { get; set; }
-        private CartDatabaseSettings databaseSettings { get; }
+        private CartDatabaseSettings CartDatabaseSettings { get; }
         public MongoClient MongoClient { get; set; }
 
         private readonly List<Func<Task>> _commands;
@@ -51,9 +51,9 @@ namespace CarrinhoApi.Data
             if (MongoClient != null)
                 return;
 
-            MongoClient = new MongoClient(_configuration[databaseSettings.ConnectionString]);
+            MongoClient = new MongoClient(_configuration[CartDatabaseSettings.ConnectionString]);
 
-            MongoDatabase = MongoClient.GetDatabase(_configuration[databaseSettings.DatabaseName]);
+            MongoDatabase = MongoClient.GetDatabase(_configuration[CartDatabaseSettings.DatabaseName]);
         }
 
         public IMongoCollection<T> GetCollection<T>(string name)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using CarrinhoApi.ViewModel;
 
 namespace CarrinhoApi.Domain.Entities
 {
@@ -10,7 +11,7 @@ namespace CarrinhoApi.Domain.Entities
         //Atributes
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
+        public Guid Id { get; set; }
 
         [BsonElement("Date")]
         public DateTime Date { get; set; }
@@ -23,5 +24,18 @@ namespace CarrinhoApi.Domain.Entities
 
         [BsonElement("Promocode")]
         public string Promocode { get; set; }
+
+        //I know u love constructs
+        public Cart(CartViewModel cart)
+        {
+            Id = Guid.NewGuid();
+            Date = DateTime.Now;
+            TotalPrice = cart.TotalPrice;
+            Promocode = cart.Promocode;
+        }
+        public Cart(CartViewModel cart, Guid id) : this(cart)
+        {
+            Id = id;
+        }
     }
 }

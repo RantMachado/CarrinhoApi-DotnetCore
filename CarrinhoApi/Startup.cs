@@ -10,12 +10,16 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using CarrinhoApi.Data;
-using CarrinhoApi.Data.Interfaces;
+using CarrinhoApi.Persistence;
+using CarrinhoApi.Data.CartSettings;
+using CarrinhoApi.Data.CartSettings.Interfaces;
+using CarrinhoApi.Data.Context;
+using CarrinhoApi.Data.Context.Interfaces;
 using CarrinhoApi.Repositories;
 using CarrinhoApi.Repositories.Interfaces;
 using CarrinhoApi.UoW;
 using CarrinhoApi.UoW.Interfaces;
+
 
 namespace CarrinhoApi
 {
@@ -31,16 +35,9 @@ namespace CarrinhoApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<CartDatabaseSettings>(
-                Configuration.GetSection(nameof(CartDatabaseSettings)));
-
-            services.AddSingleton<ICartDatabaseSettings>(sp =>
-                sp.GetRequiredService<IOptions<CartDatabaseSettings>>().Value);
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddScoped<IMongoContext, MongoContext>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<ICartRepository, CartRepository>();
+            MongoDbPersistence.Configure();
+            RegisterServices(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +55,14 @@ namespace CarrinhoApi
 
             app.UseHttpsRedirection();
             app.UseMvc();
+        }
+
+        private void RegisterServices(IServiceCollection services)
+        {
+            services.AddScoped<IMongoContext, MongoContext>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<ICartRepository, CartRepository>();
+            services.AddScoped<ICartDatabaseSettings, CartDatabaseSettings>();
         }
     }
 }

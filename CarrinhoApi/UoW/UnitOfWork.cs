@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using CarrinhoApi.UoW.Interfaces;
-using CarrinhoApi.Data.Interfaces;
+using CarrinhoApi.Data.Context.Interfaces;
 
 namespace CarrinhoApi.UoW
 {

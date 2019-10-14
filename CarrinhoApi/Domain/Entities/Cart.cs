@@ -1,41 +1,50 @@
 ﻿using System;
-using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using CarrinhoApi.ViewModel;
+using Newtonsoft.Json;
+using CarrinhoApi.Domain.Entities.Interface;
 
 namespace CarrinhoApi.Domain.Entities
 {
-    public class Cart 
+    public class Cart : ICart
     {
         //Atributes
         [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
         public Guid Id { get; set; }
 
         [BsonElement("Date")]
+        [JsonProperty("Date")]
         public DateTime Date { get; set; }
 
         [BsonElement("TotalPrice")]
+        [JsonProperty("TotalPrice")]
         public double TotalPrice { get; set; }
 
         [BsonElement("Sessions")]
-        public List<Session> Sessions { get; set; }
+        [JsonProperty("Sessions")]
+        public ISession Session { get; set; }
 
         [BsonElement("Promocode")]
+        [JsonProperty("Promocode")]
         public string Promocode { get; set; }
 
         //I know u love constructs
-        public Cart(CartViewModel cart)
+        public Cart(ICart cartVM) // Construtor da CartVieModel
         {
             Id = Guid.NewGuid();
             Date = DateTime.Now;
-            TotalPrice = cart.TotalPrice;
-            Promocode = cart.Promocode;
+            Session = cartVM.Session;
+            TotalPrice = cartVM.TotalPrice;            
+            Promocode = cartVM.Promocode;
         }
-        public Cart(CartViewModel cart, Guid id) : this(cart)
+
+        public Cart(Guid id, DateTime date, double totalPrice, Session session, string promocode)
         {
             Id = id;
+            Date = date;
+            TotalPrice = totalPrice;
+            Session = session;
+            Promocode = promocode;
         }
     }
 }

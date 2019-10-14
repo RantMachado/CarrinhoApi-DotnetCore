@@ -1,5 +1,5 @@
 ﻿using CarrinhoApi.Domain.Entities;
-using CarrinhoApi.Data.Interfaces;
+using CarrinhoApi.Data.Context.Interfaces;
 using CarrinhoApi.Repositories.Interfaces;
 
 namespace CarrinhoApi.Repositories

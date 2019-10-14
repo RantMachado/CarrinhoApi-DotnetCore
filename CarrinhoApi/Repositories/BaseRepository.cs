@@ -4,11 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using MongoDB.Driver;
 using ServiceStack;
-using CarrinhoApi.Data.Interfaces;
+using CarrinhoApi.Domain.Entities;
+using CarrinhoApi.Data.Context.Interfaces;
 
 namespace CarrinhoApi.Repositories
 {
-    public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : class
+    public abstract class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         //Atributes
         protected readonly IMongoContext _context;
@@ -17,17 +18,16 @@ namespace CarrinhoApi.Repositories
         //Construct 
         protected BaseRepository(IMongoContext context)
         {
-            _context = context;
+            _context = context;            
         }
 
-        //Methods of BaseRepository
         public virtual void Add(TEntity obj)
         {
             ConfigDbSet();
             _context.AddCommand(() => DbSet.InsertOneAsync(obj));
-
         }
 
+        //Methods of BaseRepository
         private void ConfigDbSet()
         {
             DbSet = _context.GetCollection<TEntity>(typeof(TEntity).Name);
@@ -36,11 +36,11 @@ namespace CarrinhoApi.Repositories
         public virtual async Task<TEntity> GetById(Guid id)
         {
             ConfigDbSet();
-            var data = await DbSet.FindAsync(Builders<TEntity>.Filter.Eq("_id", id ));
-            return data.SingleOrDefault();
+            var data = await DbSet.FindAsync( Builders<TEntity>.Filter.Eq("_id", id));
+            return await data.SingleOrDefaultAsync();
         }
 
-        public virtual async Task<List<TEntity>> GetAll()
+        public virtual async Task<IEnumerable<TEntity>> GetAll()
         {
             ConfigDbSet();
             var all = await DbSet.FindAsync(Builders<TEntity>.Filter.Empty);
@@ -63,5 +63,6 @@ namespace CarrinhoApi.Repositories
         {
             _context?.Dispose();
         }
+
     }
 }

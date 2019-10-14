@@ -2,24 +2,27 @@
 using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using CarrinhoApi.ViewModel;
+using Newtonsoft.Json;
+using CarrinhoApi.Domain.Entities.Interface;
 
 namespace CarrinhoApi.Domain.Entities
 {
-    public class Session 
+    public class Session : ISession
     {
         [BsonElement("Event")]
-        public Event Event { get; set; }
-        [BsonElement("Date")]
-        public DateTime Date { get; set; }
-        [BsonElement("Theatre")]
-        public Theatre Theatre { get; set; }
-        [BsonElement("Tickets")]
-        public List<Ticket> ListTickets { get; set; }
+        [JsonProperty("Event")]
+        public IEvent Event { get; set; }
 
-        public Session(SessionViewModel session)
-        {
-            Date = DateTime.Now;
-        }
+        [BsonElement("Date")]
+        [JsonProperty("Date")]
+        public DateTime Date { get; set; }
+
+        [BsonElement("Theatre")]
+        [JsonProperty("Theatre")]
+        public ITheatre Theatre { get; set; }
+
+        [BsonElement("Tickets")]
+        [JsonProperty("Tickets")]
+        public List<ITicket> ListTickets { get; set; }
     }
 }

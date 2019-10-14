@@ -1,6 +1,6 @@
-﻿using CarrinhoApi.Data.Interfaces;
+﻿using CarrinhoApi.Data.CartSettings.Interfaces;
 
-namespace CarrinhoApi.Data
+namespace CarrinhoApi.Data.CartSettings
 {
     public class CartDatabaseSettings : ICartDatabaseSettings
     {

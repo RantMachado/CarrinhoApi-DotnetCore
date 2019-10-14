@@ -10,8 +10,7 @@ using CarrinhoApi.ViewModel;
 
 namespace CarrinhoApi.Controllers
 {
-    [Route("api/[controller]")]
-    [Produces("aplication/json")]
+    [Route("api/[controller]")]    
     [ApiController]
     public class CartController : ControllerBase
     {
@@ -25,72 +24,27 @@ namespace CarrinhoApi.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        [HttpGet]        
-        public async Task<ActionResult<List<Cart>>> Get()
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Cart>>> Get()
         {
             var cartItems = await _cartRepository.GetAll();
             return Ok(cartItems);
         }
 
-        [HttpGet("{id:length(24)}", Name = "Get")]
-        [ValidateAntiForgeryToken]
+        [HttpGet("{id}")]
         public async Task<ActionResult<Cart>> Get(Guid id)
         {
-            var cartItems = await _cartRepository.GetById(id);
-            return Ok(cartItems);
+            var cartItem = await _cartRepository.GetById(id);
+            return Ok(cartItem);
         }
 
         [HttpPost, Route("PostSimulatingError")]
-        [ValidateAntiForgeryToken]
-        public IActionResult PostSimulatingError([FromBody] CartViewModel value)
+        public IActionResult PostSimulatingError([FromBody] CartViewModel cartVM)
         {
-            var cartItem = new Cart(value);
-            _cartRepository.Add(cartItem);
-
+            var item = new Cart(cartVM);
+            _cartRepository.Add(item);
             return BadRequest();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult<Cart>> Post([FromBody] CartViewModel value)
-        {
-            var cartItem = new Cart(value);
-            _cartRepository.Add(cartItem);
-
-            var testCartItem = await _cartRepository.GetById(cartItem.Id);
-
-            await _unitOfWork.Commit();
-
-            testCartItem = await _cartRepository.GetById(cartItem.Id);
-
-            return Ok(testCartItem);
-        }
-
-        [HttpPut("{id:length(24)}")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult<Cart>> Put(Guid id, [FromBody] CartViewModel value)
-        {
-            var cartItem = new Cart(value, id);
-            _cartRepository.Update(cartItem);
-
-            await _unitOfWork.Commit();
-
-            return Ok(await _cartRepository.GetById(id));
-        }
-
-        [HttpDelete("{id:length(24)}")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Delete(Guid id)
-        {
-            _cartRepository.Remove(id);
-            var testCartItem = await _cartRepository.GetById(id);
-
-            await _unitOfWork.Commit();
-
-            testCartItem = await _cartRepository.GetById(id);
-
-            return Ok();
-
-        }
     }
 }

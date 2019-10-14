@@ -8,8 +8,8 @@ namespace CarrinhoApi.Repositories
     {
         void Add(TEntity obj);
         Task<TEntity> GetById(Guid id);
-        Task<List<TEntity>> GetAll();
+        Task<IEnumerable<TEntity>> GetAll();
         void Update(TEntity obj);
-        void Remove(Guid id);        
+        void Remove(Guid id);
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace CarrinhoApi.Data.Interfaces
+﻿namespace CarrinhoApi.Data.CartSettings.Interfaces
 {
     public interface ICartDatabaseSettings
     {

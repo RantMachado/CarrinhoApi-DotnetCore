@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using CarrinhoApi.Domain.Entities;
+using CarrinhoApi.Domain.Entities.Interface;
 
 namespace CarrinhoApi.ViewModel
 {
-    public class SessionViewModel
+    public class SessionViewModel : ISession
     {
-        public EventViewModel Event { get; set; }
+        public IEvent Event { get; set; }
         public DateTime Date { get; set; }
-        public TheatreViewModel Theatre { get; set; }
-        public List<TicketViewModel> ListTickets { get; set; }
+        public ITheatre Theatre { get; set; }
+        public List<ITicket> ListTickets { get; set; }
     }
 }

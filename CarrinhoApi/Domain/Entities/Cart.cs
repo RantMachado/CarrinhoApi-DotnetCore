@@ -9,7 +9,7 @@ namespace CarrinhoApi.Domain.Entities
     public class Cart : ICart
     {
         //Atributes
-        [BsonId]
+        [BsonId]        
         public Guid Id { get; set; }
 
         [BsonElement("Date")]
@@ -35,6 +35,15 @@ namespace CarrinhoApi.Domain.Entities
             Date = DateTime.Now;
             Session = cartVM.Session;
             TotalPrice = cartVM.TotalPrice;            
+            Promocode = cartVM.Promocode;
+        }
+
+        public Cart(Guid id,ICart cartVM) // Construtor da CartVieModel
+        {
+            Id = Guid.NewGuid();
+            Date = DateTime.Now;
+            Session = cartVM.Session;
+            TotalPrice = cartVM.TotalPrice;
             Promocode = cartVM.Promocode;
         }
 

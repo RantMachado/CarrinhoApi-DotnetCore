@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using MongoDB.Bson.Serialization;
 using CarrinhoApi.Domain.Entities;
+using CarrinhoApi.Domain.Entities.Interface;
 
 namespace CarrinhoApi.Persistence
 {
@@ -15,17 +17,9 @@ namespace CarrinhoApi.Persistence
                 map.MapIdMember(x => x.Id);
                 map.SetIdMember(map.GetMemberMap(x => x.Id));
                 map.MapMember(x => x.Date).ApplyDefaultValue(DateTime.Now);
-                map.MapMember(x => x.TotalPrice).SetIsRequired(true);
-                map.MapMember(x => x.Session).SetIsRequired(true);
-                //map.MapMember(x => x.Session.Event).SetIsRequired(true);
-                //map.MapMember(x => x.Session.Event.IdEvent);
-                //map.MapMember(x => x.Session.Event.NameEvent);
-                //map.MapMember(x => x.Session.Date);
-                //map.MapMember(x => x.Session.Theatre).SetIsRequired(true); ;
-                //map.MapMember(x => x.Session.Theatre.IdTheatre);
-                //map.MapMember(x => x.Session.Theatre.NameTheatre);
-                //map.MapMember(x => x.Session.ListTickets).SetIsRequired(true);                
-                map.MapMember(x => x.Promocode).SetIsRequired(true);
+                map.MapMember(x => x.TotalPrice);
+                map.MapMember(x => x.Session);
+                map.MapMember(x => x.Promocode);
             });
         }
     }

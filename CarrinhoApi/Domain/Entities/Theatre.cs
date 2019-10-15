@@ -7,12 +7,12 @@ namespace CarrinhoApi.Domain.Entities
 {
     public class Theatre : ITheatre
     {
-        [BsonElement("Id")]
-        [JsonProperty("Id")]
+        //[BsonElement("Id")]
+        //[JsonProperty("Id")]
         public int IdTheatre { get; set; }
 
-        [BsonElement("Name")]
-        [JsonProperty("Name")]
+        //[BsonElement("Name")]
+        //[JsonProperty("Name")]
         public string NameTheatre { get; set; }
     }
 }

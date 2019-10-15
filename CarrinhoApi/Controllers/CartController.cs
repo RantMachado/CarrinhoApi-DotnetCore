@@ -24,21 +24,21 @@ namespace CarrinhoApi.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        [HttpGet]
+        [HttpGet]        
         public async Task<ActionResult<IEnumerable<Cart>>> Get()
         {
             var cartItems = await _cartRepository.GetAll();
             return Ok(cartItems);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:length(24)}")]        
         public async Task<ActionResult<Cart>> Get(Guid id)
         {
             var cartItem = await _cartRepository.GetById(id);
             return Ok(cartItem);
         }
 
-        [HttpPost, Route("PostSimulatingError")]
+        [HttpPost, Route("PostSimulatingError")]        
         public IActionResult PostSimulatingError([FromBody] CartViewModel cartVM)
         {
             var item = new Cart(cartVM);
@@ -46,5 +46,45 @@ namespace CarrinhoApi.Controllers
             return BadRequest();
         }
 
+        [HttpPost]        
+        public async Task<ActionResult<Cart>> Post([FromBody] CartViewModel cartViewModel)
+        {
+            var cartItem = new Cart(cartViewModel);
+            _cartRepository.Add(cartItem);
+
+            var testCartitem = await _cartRepository.GetById(cartItem.Id);
+
+            await _unitOfWork.Commit();
+
+            testCartitem = await _cartRepository.GetById(cartItem.Id);
+
+            return Ok(testCartitem);
+        }
+
+        [HttpPut("{id:length(24)}")]        
+        public async Task<ActionResult<Cart>> Put(Guid id, [FromBody] CartViewModel cartViewModel)
+        {
+            var cartItem = new Cart(id, cartViewModel);
+
+            _cartRepository.Update(cartItem);
+
+            await _unitOfWork.Commit();
+
+            return Ok(await _cartRepository.GetById(id));
+        }
+
+        [HttpDelete("{id:length(24)}")]        
+        public async Task<ActionResult> Delete(Guid id)
+        {
+            _cartRepository.Remove(id);
+
+            var testCartItem = await _cartRepository.GetById(id);
+
+            await _unitOfWork.Commit();
+
+            testCartItem = await _cartRepository.GetById(id);
+
+            return Ok();
+        }
     }
 }

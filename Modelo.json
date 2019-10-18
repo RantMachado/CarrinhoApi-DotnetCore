@@ -1,31 +1,138 @@
-[
-{
- "_id": "5d8a8bb3751cbf9ce00b5b6d",
- "Date": "2019-09-24T21:33:38.929Z",
- "TotalPrice": "93.00000",
- "Sessions": {
- "Event": {
- "Id": 20988,
- "Name": "It - Capitulo 2"
- },
- "Date": "2019-09-25T20:00:00.000Z",
- "Theatre": {
- "Id": 2,
- "Name": "Kinoplex RioSul"
- },
- "Tickets": [
- {
- "Id": 23,
- "Name": "Meia",
- "Price": "31.00000"
- },
- {
- "Id": 45,
- "Name": "Inteira",
- "Price": "62.00000"
- }
- ]
- },
- "Promocode": "MxNxhm3q"
-}
+[ 
+   { 
+      "Date":"2019-09-24T21:33:38.929Z",
+      "TotalPrice":"93.00000",
+      "Sessions":{ 
+         "Event":{ 
+            "Id":20988,
+            "Name":"It - Capitulo 2"
+         },
+         "Date":"2019-09-25T20:00:00.000Z",
+         "Theatre":{ 
+            "Id":2,
+            "Name":"Kinoplex RioSul"
+         },
+         "Tickets":[ 
+            { 
+               "Id":23,
+               "Name":"Meia",
+               "Price":"31.00000"
+            },
+            { 
+               "Id":45,
+               "Name":"Inteira",
+               "Price":"62.00000"
+            }
+         ]
+      },
+      "Promocode":"MxNxhm3q"
+   },
+   { 
+      "Date":"2019-09-25T20:10:38.929Z",
+      "TotalPrice":"155.00000",
+      "Sessions":{ 
+         "Event":{ 
+            "Id":20988,
+            "Name":"O Poderoso Chefão"
+         },
+         "Date":"2019-09-25T20:00:00.000Z",
+         "Theatre":{ 
+            "Id":3,
+            "Name":"Cinemark DownTown"
+         },
+         "Tickets":[ 
+            { 
+               "Id":23,
+               "Name":"Meia",
+               "Price":"31.00000"
+            },
+            { 
+               "Id":45,
+               "Name":"Inteira",
+               "Price":"62.00000"
+            },
+            { 
+               "Id":45,
+               "Name":"Inteira",
+               "Price":"62.00000"
+            }
+
+         ]
+      },
+      "Promocode":"YsnPvmhm"
+   },
+   { 
+      "Date":"2019-09-25T20:10:38.929Z",
+      "TotalPrice":"31.00000",
+      "Sessions":{ 
+         "Event":{ 
+            "Id":20988,
+            "Name":"De Volta para o Futuro"
+         },
+         "Date":"2019-09-25T20:00:00.000Z",
+         "Theatre":{ 
+            "Id":3,
+            "Name":"Roxy"
+         },
+         "Tickets":[ 
+            { 
+               "Id":23,
+               "Name":"Meia",
+               "Price":"31.00000"
+            }
+         ]
+      },
+      "Promocode":"xttEVw3k"
+   },
+   { 
+      "Date":"2019-09-25T20:10:38.929Z",
+      "TotalPrice":"31.00000",
+      "Sessions":{ 
+         "Event":{ 
+            "Id":20988,
+            "Name":"Turma da Monica - Laços"
+         },
+         "Date":"2019-09-25T20:00:00.000Z",
+         "Theatre":{ 
+            "Id":3,
+            "Name":"Kinoplex Nova América"
+         },
+         "Tickets":[ 
+            { 
+               "Id":23,
+               "Name":"Meia",
+               "Price":"31.00000"
+            }
+         ]
+      },
+      "Promocode":"b9E65dCf"
+   },
+   { 
+      "Date":"2019-09-24T21:33:38.929Z",
+      "TotalPrice":"93.00000",
+      "Sessions":{ 
+         "Event":{ 
+            "Id":20988,
+            "Name":"Toy Story 4"
+         },
+         "Date":"2019-09-25T20:00:00.000Z",
+         "Theatre":{ 
+            "Id":2,
+            "Name":"Kinoplex Shopping Boulevard RJ"
+         },
+         "Tickets":[ 
+            { 
+               "Id":23,
+               "Name":"Meia",
+               "Price":"31.00000"
+            },
+            { 
+               "Id":45,
+               "Name":"Inteira",
+               "Price":"62.00000"
+            }
+         ]
+      },
+      "Promocode":"VgfGVmZp"
+   }  
 ]

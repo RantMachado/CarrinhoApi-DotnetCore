@@ -3,6 +3,7 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
 using CarrinhoApi.Domain.Entities.Interface;
+using CarrinhoApi.ViewModel;
 
 namespace CarrinhoApi.Domain.Entities
 {
@@ -10,7 +11,6 @@ namespace CarrinhoApi.Domain.Entities
         {
             [BsonId]
             [BsonRepresentation(BsonType.ObjectId)]
-            [JsonProperty("_id")]
             public string Id { get; set; }
             
             [JsonProperty("Date")]
@@ -25,25 +25,14 @@ namespace CarrinhoApi.Domain.Entities
             [JsonProperty("PromoCode")]
             public string Promocode { get; set; }
 
-            //I know u love constructs
-            public Cart(ICart cartVM) // Construtor da CartVieModel
+        //I know u love constructs
+            public Cart(CartViewModel cartVM)
             {
-                Id = cartVM.Id;
-                Date = DateTime.Now;
-                Session = cartVM.Session;
+                Date = cartVM.Date;
                 TotalPrice = cartVM.TotalPrice;
+                Session = cartVM.Session;
                 Promocode = cartVM.Promocode;
             }
-
-            //public Cart(Guid id, ICart cartVM) // Construtor da CartVieModel
-            //{
-            //    Id = Guid.NewGuid();
-            //    Date = DateTime.Now;
-            //    Session = cartVM.Session;
-            //    TotalPrice = cartVM.TotalPrice;
-            //    Promocode = cartVM.Promocode;
-            //}
-
             public Cart(string id, DateTime date, double totalPrice, Sessions session, string promocode)
             {
                 Id = id;
@@ -53,31 +42,4 @@ namespace CarrinhoApi.Domain.Entities
                 Promocode = promocode;
             }
         }
-        /*
-        public class Sessions
-        {
-            public Event Event { get; set; }
-            public DateTime Date { get; set; }
-            public Theatre Theatre { get; set; }
-            public Ticket[] Tickets { get; set; }
-        }
-
-        public class Event
-        {
-            public int Id { get; set; }
-            public string Name { get; set; }
-        }
-
-        public class Theatre
-        {
-            public int Id { get; set; }
-            public string Name { get; set; }
-        }
-
-        public class Ticket
-        {
-            public int Id { get; set; }
-            public string Name { get; set; }
-            public double Price { get; set; }
-        }*/
 }

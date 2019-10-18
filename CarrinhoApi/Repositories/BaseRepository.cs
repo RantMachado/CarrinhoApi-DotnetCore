@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MongoDB.Driver;
 using ServiceStack;
-using CarrinhoApi.Domain.Entities;
 using CarrinhoApi.Data.Context.Interfaces;
 
 namespace CarrinhoApi.Repositories

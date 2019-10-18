@@ -1,15 +1,14 @@
-﻿using System.Linq;
-using System.Text.RegularExpressions;
-using CarrinhoApi.Domain.Entities.Interface;
+﻿using System.Text.RegularExpressions;
 using CarrinhoApi.Service.Exceptions;
 using CarrinhoApi.Service.Interfaces;
+using CarrinhoApi.ViewModel;
 
 namespace CarrinhoApi.Service
 {
     public class CartService : ICartService
     {
 
-        public void ValidatePromo(ICart cart)
+        public void ValidatePromo(CartViewModel cart)
         {
             string promoToValidateFormat = cart.Promocode;
             string pattern = @"[a-zA-Z0-9]{8}";
@@ -58,17 +57,17 @@ namespace CarrinhoApi.Service
             }
         }
 
-        private void FinaldeSemanaDiaDeCinema(ICart cart)
+        private void FinaldeSemanaDiaDeCinema(CartViewModel cart)
         {
             cart.TotalPrice -= 12.5;
         }
 
-        private void CoringaEnoCinema(ICart cart)
+        private void CoringaEnoCinema(CartViewModel cart)
         {
             cart.TotalPrice -= 20.00;
         }
 
-        private void IngressoDotCom99(ICart cart)
+        private void IngressoDotCom99(CartViewModel cart)
         {
             cart.TotalPrice -= 9.99;
         }

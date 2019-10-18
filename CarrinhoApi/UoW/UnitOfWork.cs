@@ -22,7 +22,7 @@ namespace CarrinhoApi.UoW
 
         public void Dispose()
         {
-            _context?.Dispose();
+            _context.Dispose();
         }
     }
 }

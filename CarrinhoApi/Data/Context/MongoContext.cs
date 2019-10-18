@@ -4,10 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
-using Microsoft.Extensions.Options;
-using CarrinhoApi.Domain.Entities;
-using CarrinhoApi.Data.CartSettings;
-using CarrinhoApi.Data.CartSettings.Interfaces;
 using CarrinhoApi.Data.Context.Interfaces;
 
 namespace CarrinhoApi.Data.Context

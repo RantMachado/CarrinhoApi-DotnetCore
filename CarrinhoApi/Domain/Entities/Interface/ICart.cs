@@ -1,5 +1,4 @@
 ﻿using System;
-using CarrinhoApi.Domain.Entities;
 
 namespace CarrinhoApi.Domain.Entities.Interface
 {

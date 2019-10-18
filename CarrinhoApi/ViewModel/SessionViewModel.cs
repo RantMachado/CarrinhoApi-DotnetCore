@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using CarrinhoApi.Domain.Entities;
 using CarrinhoApi.Domain.Entities.Interface;
 
 namespace CarrinhoApi.ViewModel

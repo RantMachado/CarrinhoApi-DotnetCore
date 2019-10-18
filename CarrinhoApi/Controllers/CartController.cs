@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CarrinhoApi.Domain.Entities;
@@ -35,10 +33,14 @@ namespace CarrinhoApi.Controllers
             return Ok(cartItems);
         }
 
-        [HttpGet("{id:length(24)}", Name="GetCartItem")]        
+        [HttpGet("{id:length(24)}", Name ="GetCart")]        
         public async Task<ActionResult<Cart>> Get(string id)
         {
             var cartItem = await _cartRepository.GetById(id);
+            if (cartItem == null)
+            {
+                return NotFound();
+            }
             return Ok(cartItem);
         }
 
@@ -70,15 +72,15 @@ namespace CarrinhoApi.Controllers
         }
 
         [HttpPut("{id:length(24)}")]              
-        public async Task<ActionResult<Cart>> Put([FromBody] CartViewModel cartViewModel)
+        public async Task<ActionResult<Cart>> Put(string id, [FromBody] CartViewModel cartViewModel)
         {
-            var cartItem = new Cart(cartViewModel);
+            var cartItem = new Cart(id, cartViewModel.Date, cartViewModel.TotalPrice, cartViewModel.Session, cartViewModel.Promocode);
 
             _cartRepository.Update(cartItem);
 
             await _unitOfWork.Commit();
 
-            return Ok(await _cartRepository.GetById(cartItem.Id));
+            return Ok(await _cartRepository.GetById(id));
         }
 
         [HttpDelete("{id:length(24)}")]        

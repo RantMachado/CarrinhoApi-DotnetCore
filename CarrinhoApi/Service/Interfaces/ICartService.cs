@@ -1,9 +1,9 @@
-﻿using CarrinhoApi.Domain.Entities.Interface;
+﻿using CarrinhoApi.ViewModel;
 
 namespace CarrinhoApi.Service.Interfaces
 {
     public interface ICartService
     {
-        void ValidatePromo(ICart cart);
+        void ValidatePromo(CartViewModel cart);
     }
 }

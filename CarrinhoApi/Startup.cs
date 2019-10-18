@@ -38,6 +38,7 @@ namespace CarrinhoApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
             MongoDbPersistence.Configure();
             RegisterServices(services);
         }

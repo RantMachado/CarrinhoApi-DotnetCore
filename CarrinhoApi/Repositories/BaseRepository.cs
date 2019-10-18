@@ -33,11 +33,11 @@ namespace CarrinhoApi.Repositories
             DbSet = _context.GetCollection<TEntity>(typeof(TEntity).Name);
         }
 
-        public virtual async Task<TEntity> GetById(Guid id)
+        public virtual async Task<TEntity> GetById(string id)
         {
             ConfigDbSet();
-            var data = await DbSet.FindAsync( Builders<TEntity>.Filter.Eq("_id", id));
-            return await data.SingleOrDefaultAsync();
+            var data = await DbSet.FindAsync(Builders<TEntity>.Filter.Eq("_id", id));
+            return data.SingleOrDefault();
         }
 
         public virtual async Task<IEnumerable<TEntity>> GetAll()
@@ -53,7 +53,7 @@ namespace CarrinhoApi.Repositories
             _context.AddCommand(() => DbSet.ReplaceOneAsync(Builders<TEntity>.Filter.Eq("_id", obj.GetId()), obj));
         }
 
-        public virtual void Remove(Guid id)
+        public virtual void Remove(string id)
         {
             ConfigDbSet();
             _context.AddCommand(() => DbSet.DeleteOneAsync(Builders<TEntity>.Filter.Eq("_id", id)));
@@ -63,6 +63,5 @@ namespace CarrinhoApi.Repositories
         {
             _context?.Dispose();
         }
-
     }
 }

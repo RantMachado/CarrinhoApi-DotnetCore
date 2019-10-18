@@ -9,10 +9,10 @@ namespace CarrinhoApi.Domain.Entities
     {
         //[BsonElement("Id")]
         //[JsonProperty("Id")]
-        public int IdEvent { get; set; }
+        public int Id { get; set; }
 
         //[BsonElement("Name")]
         //[JsonProperty("Name")]
-        public string NameEvent { get; set; }
+        public string Name { get; set; }
     }
 }

@@ -4,7 +4,7 @@ namespace CarrinhoApi.ViewModel
 {
     public class EventViewModel : IEvent
     {
-        public int IdEvent { get; set; }
-        public string NameEvent { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

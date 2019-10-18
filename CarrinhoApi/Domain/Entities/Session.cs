@@ -7,7 +7,7 @@ using CarrinhoApi.Domain.Entities.Interface;
 
 namespace CarrinhoApi.Domain.Entities
 {
-    public class Session : ISession
+    public class Sessions : ISession
     {
         //[BsonElement("Event")]
         //[JsonProperty("Event")]
@@ -23,6 +23,6 @@ namespace CarrinhoApi.Domain.Entities
 
         //[BsonElement("Tickets")]
         //[JsonProperty("Tickets")]
-        public List<ITicket> ListTickets { get; set; }
+        public ITicket[] Tickets { get; set; }
     }
 }

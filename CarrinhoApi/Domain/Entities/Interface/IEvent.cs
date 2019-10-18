@@ -7,7 +7,7 @@ namespace CarrinhoApi.Domain.Entities.Interface
 {
     public interface IEvent
     {
-        int IdEvent { get; set; }
-        string NameEvent { get; set; }
+        int Id { get; set; }
+        string Name { get; set; }
     }
 }

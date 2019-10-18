@@ -7,6 +7,8 @@ using CarrinhoApi.Domain.Entities;
 using CarrinhoApi.Repositories.Interfaces;
 using CarrinhoApi.UoW.Interfaces;
 using CarrinhoApi.ViewModel;
+using CarrinhoApi.Service.Interfaces;
+
 
 namespace CarrinhoApi.Controllers
 {
@@ -16,12 +18,14 @@ namespace CarrinhoApi.Controllers
     {
         private readonly ICartRepository _cartRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ICartService _cartService;
 
         //Seriously!?
-        public CartController(ICartRepository cartRepository, IUnitOfWork unitOfWork)
+        public CartController(ICartRepository cartRepository, IUnitOfWork unitOfWork, ICartService cartService)
         {
             _cartRepository = cartRepository;
             _unitOfWork = unitOfWork;
+            _cartService = cartService;
         }
 
         [HttpGet]        
@@ -31,8 +35,8 @@ namespace CarrinhoApi.Controllers
             return Ok(cartItems);
         }
 
-        [HttpGet("{id:length(24)}")]        
-        public async Task<ActionResult<Cart>> Get(Guid id)
+        [HttpGet("{id:length(24)}", Name="GetCartItem")]        
+        public async Task<ActionResult<Cart>> Get(string id)
         {
             var cartItem = await _cartRepository.GetById(id);
             return Ok(cartItem);
@@ -49,7 +53,11 @@ namespace CarrinhoApi.Controllers
         [HttpPost]        
         public async Task<ActionResult<Cart>> Post([FromBody] CartViewModel cartViewModel)
         {
+            if(cartViewModel.Promocode != null)
+                _cartService.ValidatePromo(cartViewModel);
+
             var cartItem = new Cart(cartViewModel);
+
             _cartRepository.Add(cartItem);
 
             var testCartitem = await _cartRepository.GetById(cartItem.Id);
@@ -61,20 +69,20 @@ namespace CarrinhoApi.Controllers
             return Ok(testCartitem);
         }
 
-        [HttpPut("{id:length(24)}")]        
-        public async Task<ActionResult<Cart>> Put(Guid id, [FromBody] CartViewModel cartViewModel)
+        [HttpPut("{id:length(24)}")]              
+        public async Task<ActionResult<Cart>> Put([FromBody] CartViewModel cartViewModel)
         {
-            var cartItem = new Cart(id, cartViewModel);
+            var cartItem = new Cart(cartViewModel);
 
             _cartRepository.Update(cartItem);
 
             await _unitOfWork.Commit();
 
-            return Ok(await _cartRepository.GetById(id));
+            return Ok(await _cartRepository.GetById(cartItem.Id));
         }
 
         [HttpDelete("{id:length(24)}")]        
-        public async Task<ActionResult> Delete(Guid id)
+        public async Task<ActionResult> Delete(string id)
         {
             _cartRepository.Remove(id);
 

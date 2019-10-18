@@ -8,6 +8,6 @@ namespace CarrinhoApi.Domain.Entities.Interface
         IEvent Event { get; set; }
         DateTime Date { get; set; }
         ITheatre Theatre { get; set; }
-        List<ITicket> ListTickets { get; set; }
+        ITicket[] Tickets { get; set; }
     }
 }

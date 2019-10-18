@@ -4,8 +4,8 @@ namespace CarrinhoApi.Domain.Entities.Interface
 {
     public interface ITicket
     {
-        int IdTicket { get; set; }
-        TicketType TicketType { get; set; }
+        int Id { get; set; }
+        TicketType Name { get; set; }
         double Price { get; set; }
     }
 }

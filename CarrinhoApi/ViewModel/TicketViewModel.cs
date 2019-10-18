@@ -5,8 +5,8 @@ namespace CarrinhoApi.ViewModel
 {
     public class TicketViewModel : ITicket
     {
-        public int IdTicket { get; set; }
-        public TicketType TicketType { get; set; }
+        public int Id { get; set; }
+        public TicketType Name { get; set; }
         public double Price { get; set; }
     }
 }

@@ -4,7 +4,7 @@ namespace CarrinhoApi.ViewModel
 {
     public class TheatreViewModel : ITheatre
     {
-        public int IdTheatre { get; set; }
-        public string NameTheatre { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

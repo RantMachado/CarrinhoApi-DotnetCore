@@ -10,6 +10,6 @@ namespace CarrinhoApi.ViewModel
         public IEvent Event { get; set; }
         public DateTime Date { get; set; }
         public ITheatre Theatre { get; set; }
-        public List<ITicket> ListTickets { get; set; }
+        public ITicket[] Tickets { get; set; }
     }
 }

@@ -10,11 +10,11 @@ namespace CarrinhoApi.Domain.Entities
     {
         //[BsonElement("Id")]
         //[JsonProperty("Id")]
-        public int IdTicket { get; set; }
+        public int Id { get; set; }
 
         //[BsonElement("Name")]
         //[JsonProperty("Name")]
-        public TicketType TicketType { get; set; }
+        public TicketType Name { get; set; }
 
         //[BsonElement("Price")]
         //[JsonProperty("Price")]

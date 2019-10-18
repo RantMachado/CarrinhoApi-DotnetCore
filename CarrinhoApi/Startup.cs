@@ -19,6 +19,8 @@ using CarrinhoApi.Repositories;
 using CarrinhoApi.Repositories.Interfaces;
 using CarrinhoApi.UoW;
 using CarrinhoApi.UoW.Interfaces;
+using CarrinhoApi.Service;
+using CarrinhoApi.Service.Interfaces;
 
 
 namespace CarrinhoApi
@@ -63,6 +65,7 @@ namespace CarrinhoApi
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ICartRepository, CartRepository>();
             services.AddScoped<ICartDatabaseSettings, CartDatabaseSettings>();
+            services.AddScoped<ICartService, CartService>();
         }
     }
 }
